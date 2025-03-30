@@ -11,10 +11,10 @@ import com.repository.CandidateRepository;
 import com.repository.UserRepository;
 
 @SpringBootApplication
-public class MySpringBootAa23vVotingAppFinalApplication implements CommandLineRunner{
+public class VoterzApp implements CommandLineRunner{
 
 	public static void main(String[] args) {
-		SpringApplication.run(MySpringBootAa23vVotingAppFinalApplication.class, args);
+		SpringApplication.run(VoterzApp.class, args);
 	}
 	
 	@Autowired
