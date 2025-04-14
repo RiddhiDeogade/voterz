@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.Candidate;
@@ -25,39 +24,33 @@ public class CandidateController {
 	@Autowired
 	private UserService userServ;
 
-	@PostMapping("/addcandidate") // Vote
-	public String addCandidate(
-			@RequestParam("candidate") String candidate,
-			Principal principal,
-			Model model,
-			HttpSession session) {
-
-		// Get logged-in user details
-		String email = principal.getName();
+	@PostMapping("/addcandidate")
+	public String addCandidate(@RequestParam("candidate") String candidate,
+							   Principal p, Model model, HttpSession session) {
+		String email = p.getName();
 		User user = userServ.getUserByEmail(email);
 
-		// Check if the user has already voted
-		if (user.getStatus() == null || user.getStatus().equals("Not Voted")) {
+		// Only allow voting if user has not voted yet
+		if ("Not Voted".equalsIgnoreCase(user.getStatus())) {
 			try {
-				// Retrieve selected candidate and increment votes
+				// Fetch candidate and increment votes
 				Candidate selectedCan = canServ.getCandidateByCandidate(candidate);
 				selectedCan.setVotes(selectedCan.getVotes() + 1);
-				canServ.addCandidate(selectedCan); // Update candidate votes
+				canServ.addCandidate(selectedCan); // save candidate
 
-				// Update user status to "Voted"
+				// Update user status
 				user.setStatus("Voted");
-				userServ.addUser(user); // Save updated user status
+				userServ.addUser(user); // save user
 
-				session.setAttribute("vmsg", "Successfully Voted!");
+				session.setAttribute("vmsg", "Successfully Voted...");
 			} catch (Exception e) {
-				session.setAttribute("vmsg", "Something went wrong while voting.");
-				e.printStackTrace(); // Consider using logging instead of printStackTrace()
-				return "redirect:/user/";
+				session.setAttribute("vmsg", "Something went wrong...");
+				e.printStackTrace();
 			}
 		} else {
-			session.setAttribute("vmsg", "You have already voted!");
+			session.setAttribute("vmsg", "You have already voted.");
 		}
 
-		return "redirect:/user/";
+		return "redirect:/user";
 	}
 }

@@ -1,6 +1,7 @@
 package com.controller;
 
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +19,21 @@ public class HomeController {
 		m.addAttribute("title","HOME");
 		return "home";
 	}
-	
+
 	@GetMapping("/signin")
-	public String login(Model m)
-	{
-		m.addAttribute("title", "SIGNIN");
+	public String signin(HttpSession session, Model model) {
+		Object vmsg = session.getAttribute("vmsg");
+
+		if (vmsg != null) {
+			model.addAttribute("vmsg", vmsg);
+			session.removeAttribute("vmsg"); // Clear it manually here
+		}
+
 		return "signin";
 	}
-	
-	
+
+
+
 	@GetMapping("/register")
 	public String register(Model m)
 	{

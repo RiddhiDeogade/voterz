@@ -1,7 +1,6 @@
 package com.model;
 
 import jakarta.persistence.*;
-
 import lombok.*;
 
 @Entity
@@ -10,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Data
 @Table(name = "candidates")
 public class Candidate {
 

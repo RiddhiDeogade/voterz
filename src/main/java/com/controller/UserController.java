@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.model.User;
 import com.service.UserService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -20,22 +21,47 @@ public class UserController {
 	@Autowired
 	private UserService userServ;
 
+	// Display Registration Page
+	@GetMapping("/user-register")
+	public String showRegisterForm(HttpSession session, Model model) {
+		Object msg = session.getAttribute("msg");
+		Object fail = session.getAttribute("fail");
+
+		if (msg != null) {
+			model.addAttribute("msg", msg);
+			session.removeAttribute("msg");
+		}
+
+		if (fail != null) {
+			model.addAttribute("fail", fail);
+			session.removeAttribute("fail");
+		}
+
+		return "register";
+	}
+
+	//*************
+
+
+
+
+
+
 	// Register User
 	@PostMapping("/createuser")
-	public String createUser(@ModelAttribute User user, HttpSession session) {
+	public String createUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
 		String email = user.getEmail();
 
 		if (userServ.getUserByEmail(email) != null) {
-			session.setAttribute("fail", "Registration Failed! Email already in use.");
-			return "redirect:/register";
+			redirectAttributes.addFlashAttribute("fail", "Registration Failed! Email already in use.");
+			return "redirect:/user-register";
 		}
 
 		userServ.addUser(user);
-		session.setAttribute("msg", "Registration successful!");
-		return "redirect:/register";
-	}
+		redirectAttributes.addFlashAttribute("msg", "Registration successful!");
+		return "redirect:/user-register";	}
 
-	// User Dashboard
+	//  User Dashboard
 	@GetMapping("/user")
 	public String dashboard(Model model, Principal principal, HttpSession session) {
 		if (principal == null) {
@@ -51,4 +77,22 @@ public class UserController {
 
 		return "user/dashboard";
 	}
+
+
+	//********
+//	@GetMapping("/user")
+//	public String dashboard(Model m, Principal p)
+//	{
+//		String email = p.getName(); //
+//
+//		User user  = userServ.getUserByEmail(email);
+//
+//		m.addAttribute("user",user);
+//		m.addAttribute("title","DASHBOARD");
+//
+//		return "user/dashboard";
+//
+//
+//	}
+
 }
