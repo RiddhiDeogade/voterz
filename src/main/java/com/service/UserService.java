@@ -1,8 +1,6 @@
 package com.service;
 
-import java.util.List;
 
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.model.User;
@@ -14,7 +12,6 @@ public class UserService {
 	private final UserRepository userRepo;
 
 	// Using the static method to get the NoOpPasswordEncoder instance
-	private final NoOpPasswordEncoder passwordEncoder = (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
 
 	public UserService(UserRepository userRepo) {
 		this.userRepo = userRepo;
@@ -33,20 +30,6 @@ public class UserService {
 		return userRepo.save(user);
 	}
 
-	// Retrieves all users
-	public List<User> getAllUsers() {
-		return userRepo.findAll();
-	}
-
-	// Retrieves a user by ID
-	public User getUserById(int id) {
-		return userRepo.findById(id).orElse(null);
-	}
-
-	// Deletes a user by ID
-	public void deleteUser(int id) {
-		userRepo.deleteById(id);
-	}
 
 	// Retrieves a user by email
 	public User getUserByEmail(String email) {

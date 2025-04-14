@@ -40,13 +40,6 @@ public class UserController {
 		return "register";
 	}
 
-	//*************
-
-
-
-
-
-
 	// Register User
 	@PostMapping("/createuser")
 	public String createUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
