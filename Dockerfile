@@ -1,14 +1,19 @@
-# Use lightweight Java base image
-FROM eclipse-temurin:21-jdk-alpine
+# Use Maven to build the jar first
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 
-# Create a directory in the image to hold your app
 WORKDIR /app
 
-# Copy the built jar from the target folder
-COPY target/voterz-0.0.1-SNAPSHOT.jar app.jar
+COPY . .
 
-# Expose the port your app uses
+RUN mvn clean package -DskipTests
+
+# Use lightweight JDK image to run the app
+FROM eclipse-temurin:21-jdk-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/target/voterz-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 
-# Wait for MySQL to be ready before starting the app (if using wait-for-it)
 ENTRYPOINT ["java", "-jar", "app.jar"]
