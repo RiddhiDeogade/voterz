@@ -1,11 +1,9 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:latest
     container_name: mysql-docker
     ports:
-      - "3307:3306"
+      - "3307:3306" # Maps host port 3307 to container's MySQL port 3306
     environment:
       MYSQL_DATABASE: voterzdb
       MYSQL_USER: voterzuser
@@ -20,19 +18,19 @@ services:
       - springboot-mysql-net
 
   springboot-app:
-    image: voterz-image
+    image: voterz-image  # Ensure this image is built before using
     container_name: spring-boot-app
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .  # Build context points to current directory
+      dockerfile: Dockerfile  # Ensure you have a valid Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Maps host port 8080 to container's Spring Boot port 8080
     depends_on:
       mysql:
-        condition: service_healthy
+        condition: service_healthy  # Ensures MySQL is healthy before starting Spring Boot
     networks:
       - springboot-mysql-net
 
 networks:
   springboot-mysql-net:
-    driver: bridge
+    driver: bridge  # Default bridge network
