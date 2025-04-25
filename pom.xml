@@ -12,8 +12,6 @@
 	<groupId>com</groupId>
 	<artifactId>voterz</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
 	<name>VoterzApp</name>
 	<description>Voting App</description>
 	<properties>
@@ -97,15 +95,12 @@
 
 	</dependencies>
 	<build>
-		<finalName>voterz-0.0.1-SNAPSHOT</finalName>
 		<plugins>
-			<!-- Spring Boot Maven Plugin for repackaging the JAR -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
