@@ -9,8 +9,14 @@ import com.model.Candidate;
 import com.model.User;
 import com.repository.CandidateRepository;
 import com.repository.UserRepository;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "com.repository")
+@EntityScan(basePackages = "com.model")
+@ComponentScan(basePackages = {"com.repository", "com.model", "com"}) // optionally covers all
 public class VoterzApp implements CommandLineRunner{
 
 	public static void main(String[] args) {
