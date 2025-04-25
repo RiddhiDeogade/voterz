@@ -38,12 +38,11 @@
 
 			<!-- VOTING SECTION -->
 			<div class="col col-complementary">
-				<form th:action="@{/addcandidate}" method="post">
+				<div th:if="${session.vmsg}">
+					<h3 th:text="${session.vmsg}" style="color:green"></h3>
+				</div>
 
-					<!-- Voting Message -->
-					<div th:if="${session.vmsg}">
-						<h3 th:text="${session.vmsg}" style="color:green"></h3>
-					</div>
+				<form th:action="@{/addcandidate}" method="post">
 
 					<!-- Voting Form (only if Not Voted) -->
 					<div th:if="${user.status == 'Not Voted'}">
@@ -56,13 +55,6 @@
 						<input type="radio" name="candidate" value="candidate3" required> Candidate 3 <br><br>
 						<input type="radio" name="candidate" value="candidate4" required> Candidate 4 <br><br>
 
-						<!-- Dynamic Option (Optional: If using a list from controller) -->
-						<!--
-						<div th:each="c : ${candidates}">
-							<input type="radio" name="candidate" th:value="${c.candidate}" th:text="${c.candidate}" required><br><br>
-						</div>
-						-->
-
 						<input type="submit" value="Vote">
 					</div>
 
@@ -73,6 +65,7 @@
 
 				</form>
 			</div>
+
 
 		</div>
 	</div>
