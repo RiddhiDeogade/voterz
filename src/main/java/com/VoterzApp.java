@@ -16,9 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.repository")
 @EntityScan(basePackages = "com.model")
-@ComponentScan(basePackages = {"com.repository", "com.model", "com"}) // optionally covers all
 public class VoterzApp implements CommandLineRunner{
-
 	public static void main(String[] args) {
 		SpringApplication.run(VoterzApp.class, args);
 	}
