@@ -8,4 +8,4 @@ nixpkgsArchive = "23.11"
 cmds = ["./mvnw clean install -DskipTests"]
 
 [phases.start]
-cmd = "./mvnw spring-boot:run"
+cmd = "java -jar target/voterz-0.0.1-SNAPSHOT.jar"
