@@ -1,19 +1,43 @@
-.center
-{
-	text-align:center;
-	text-decoration: 
-	blink;
-	
+/* Center Block Modern */
+.center {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-weight: 500;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-li
-{
-	display: flex;
-	display: inline;
-	padding: 3px 15px
+/* Navigation Bar */
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2d3436;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-weight: 600;
 }
 
-ul{
-	font-weight: bold;
-	text-align:center;
+li {
+  margin: 0 10px;
+}
+
+li a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+li a:hover {
+  background-color: #636e72;
+}
+
+.active {
+  background-color: #00b894;
 }
