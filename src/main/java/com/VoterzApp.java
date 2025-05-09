@@ -17,8 +17,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.repository")
 @EntityScan(basePackages = "com.model")
 public class VoterzApp implements CommandLineRunner{
-
-//	Dotenv dotenv = Dotenv.load(); // Load .env file
 	public static void main(String[] args) {
 		SpringApplication.run(VoterzApp.class, args);
 	}

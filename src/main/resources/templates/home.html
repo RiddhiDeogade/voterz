@@ -7,14 +7,21 @@
 <body>
 	<section class="center">
 		<div class="text-center">
+		
+			
 			<h1 class="font-weight-bold">Welcome to Voterz App</h1>
 			<h3>Every Vote Counts!</h3>
+			<br>
 			<img th:src="@{/image/finger.jpg}" alt="Image" width="500" />
 
 			<div th:if="${msg}">
 				<h3 th:text="${msg}" style="color:red"></h3>
 			</div>
+
+
 		</div>
+		
+	
 	</section>
 </body>
 </html>
