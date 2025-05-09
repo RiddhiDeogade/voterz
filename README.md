@@ -8,6 +8,7 @@ It allows registered users to cast their votes for predefined candidates while p
 - **User Authentication**: Admin login for managing the voting system.
 ![User Dashboard](/p2.png)
 ![User Dashboard](/p3.png)
+- 
 - **Candidate Management**: Preloaded candidates in the database.
 - **Voting Process**: 
   - Users can log in using their credentials.
